@@ -1,7 +1,6 @@
 - 👋 Hi, I’m @Aadityaza
 - 👀 I’m interested in Algorithms, Machine Learning, Simulation and Computer Graphics.
 - 🌱 I’m currently learning Advance learning algorithms
-- 💞️ I’m looking to collaborate on ...
 - 📫 How to reach me : aadityaza@gmail.com
 
 <!---
