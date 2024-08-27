@@ -4,245 +4,197 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gallery</title>
+    <link rel="stylesheet" href="css/gallary.css">
         <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: 'Helvetica Neue', sans-serif;
-            background-color: #1a1a1a;
-            color: #e6e6e6;
-        }
-
-        .gallery {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .gallery-item {
-            margin: 10px;
-            flex: 0 0 500px;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-            transition: transform 5s ease-in-out;
-        }
-
-        .gallery-item:hover {
-            transform: scale(1.5);            
-            z-index: 999;
-        }
-
-        .gallery-item-inner {
-            width: 100%;
-            height: 0;
-            padding-bottom: 75%;
-            position: relative;
-        }
-
-        .gallery-item img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease-in-out;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.1);
-        }
-
-        .lightbox {
-            display: none;
-            position: fixed;
-            z-index: 999;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.9);
-        }
-
-        .lightbox-content {
-            position: relative;
-            margin: auto;
-            padding: 20px;
-            max-width: 100%;
-            max-height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .lightbox-image {
-            max-width: 100vw;
-            max-height: 100vh;
-            width: auto;
-            object-fit: contain; /* Ensures the image fits the container while maintaining its aspect ratio */
-            animation: zoomIn 0.5s ease-in-out;
-        }
-
-        .lightbox-prev,
-        .lightbox-next {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        width: 50%;
-        }
-
-        .lightbox-prev {
-        left: 0;
-        }
-
-        .lightbox-next {
-        right: 0;
-        }
-
-        .lightbox-close {
-            color: #e6e6e6;
-            font-size: 40px;
-            font-weight: bold;
-            position: absolute;
-            cursor: pointer;
-        }
-
-        .lightbox-prev {
-            left: 20px;
-        }
-
-        .lightbox-next {
-            right: 20px;
-        }
-
-        .lightbox-close {
-            top: 10px;
-            right: 20px;
-        }
-
-        @keyframes zoomIn {
-            from {
-                transform: scale(0);
-            }
-            to {
-                transform: scale(1);
-            }
-        }
     </style>
 
 </head>
 <body>
-    <div class="gallery">
-        <div class="gallery-item">
-            <div class="gallery-item-inner">
-                <img src="images\gallary\1.jpg" alt="Image 1">
-            </div>
-            
-        </div>
-        <div class="gallery-item">
-            <div class="gallery-item-inner">
-                <img src="images\gallary\2.jpg" alt="Image 2">
-            </div>
-        </div>
-        <div class="gallery-item">
-            <div class="gallery-item-inner">
-                <img src="images\gallary\3.jpg" alt="Image 3">
-            </div>
-        </div>
-        <div class="gallery-item">
-            <div class="gallery-item-inner">
-                <img src="images\gallary\4.jpg" alt="Image 4">3
-            </div>
-        </div>
-        <div class="gallery-item">            
-            <div class="gallery-item-inner">
-                <img src="images\gallary\5.jpg" alt="Image 5">
-            </div>
-        </div>
-        <div class="gallery-item">            
-            <div class="gallery-item-inner">
-                <img src="images\gallary\6.jpg" alt="Image 6">
-            </div>
-        </div>
-        <div class="gallery-item">
-            <div class="gallery-item-inner">
-                <img src="images\gallary\7.jpg" alt="Image 7">
-            </div>
-        </div>
-        <div class="gallery-item">
-            <div class="gallery-item-inner">
-                <img src="images\gallary\8.jpg" alt="Image 8">>
-            </div>
-            
-        </div>
-        <div class="gallery-item">
-            <div class="gallery-item-inner">
-                <img src="images\gallary\9.jpg" alt="Image 9">
-            </div>
-        </div>
 
-        <div class="gallery-item">
-            <div class="gallery-item-inner">
-                <img src="images\gallary\10.png" alt="Image 10">
-            </div>
-        </div>
-    </div>
-    <div class="lightbox" id="lightbox">
-        <div class="lightbox-content">
-            <img src="" alt="" class="lightbox-image">
-            <span class="lightbox-prev"></span>
-            <span class="lightbox-next"></span>
-            <span class="lightbox-close">&times;</span>
-        </div>
-    </div>
-
-    <script>
-    const galleryItems = document.querySelectorAll('.gallery-item');
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImage = document.querySelector('.lightbox-image');
-    const lightboxClose = document.querySelector('.lightbox-close');
-    const lightboxPrev = document.querySelector('.lightbox-prev');
-    const lightboxNext = document.querySelector('.lightbox-next');
-
-    let currentImageIndex;
-
-    galleryItems.forEach((item, index) => {
-        item.addEventListener('click', () => {
-            currentImageIndex = index;
-            const imageSource = item.querySelector('img').src;
-            lightboxImage.src = imageSource;
-            lightbox.style.display = 'block';
-        });
-    });
-
-    lightboxClose.addEventListener('click', () => {
-        lightbox.style.display = 'none';
-    });
-
-    lightboxPrev.addEventListener('click', () => {
-        currentImageIndex = (currentImageIndex === 0) ? galleryItems.length - 1 : currentImageIndex - 1;
-        const imageSource = galleryItems[currentImageIndex].querySelector('img').src;
-        lightboxImage.src = imageSource;
-    });
-
-    lightboxNext.addEventListener('click', () => {
-        currentImageIndex = (currentImageIndex === galleryItems.length - 1) ? 0 : currentImageIndex + 1;
-        const imageSource = galleryItems[currentImageIndex].querySelector('img').src;
-        lightboxImage.src = imageSource;
-    });
-
-    window.addEventListener('click', (event) => {
-        if (event.target === lightbox) {
-            lightbox.style.display = 'none';
-        }
-    });
-    </script>
 </body>
 </html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Aaditya Jha</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Abril+Fatface&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<link rel="stylesheet" href="css/animate.css">
+	
+	<link rel="stylesheet" href="css/owl.carousel.min.css">
+	<link rel="stylesheet" href="css/owl.theme.default.min.css">
+	<link rel="stylesheet" href="css/magnific-popup.css">
+
+	
+	<link rel="stylesheet" href="css/flaticon.css">
+	<link rel="stylesheet" href="css/style.css">
+<script>
+</script>
+</head>
+<body>
+
+	<div id="colorlib-page">
+		<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
+		<aside id="colorlib-aside" role="complementary" class="js-fullheight">
+
+			<h1 id="colorlib-logo" class="mb-4 mb-md-5"><a href="index.html" style="background-image: url(images/bg_1.jpg);">Aaditya <br> Jha</a></h1>
+			<nav id="colorlib-main-menu" role="navigation">
+				<ul>
+					<li class="colorlib-active"><a href="index.html">Home</a></li>
+					<li><a href="projects.html">Projects</a></li>
+					<li><a href="about.html">About</a></li>
+					<li><a href="https://aadityaza.github.io/notes/" target="_blank">My notes</a></li>					
+					<li><a href="gal.html">Gallery</a></li>
+					<li><a href="https://medium.com/@aadityaza" target="_blank">Blog</a></li>
+				</ul>
+			</nav>
+
+			<div class="colorlib-footer">
+				<div class="mb-4">
+					<!-- <h3>Subscribe for newsletter</h3>
+					<form action="#" class="colorlib-subscribe-form">
+						<div class="form-group d-flex">
+							<div class="icon"><span class="icon-paper-plane"></span></div>
+							<input type="text" class="form-control" placeholder="Enter Email Address">
+						</div>
+					</form> -->
+				</div>
+				
+				</div>
+			</aside> <!-- END COLORLIB-ASIDE -->
+			<div id="colorlib-main">
+			    <div class="gallery">
+                    <div class="gallery-item">
+                        <div class="gallery-item-inner">
+                            <img src="images\gallary\1.jpg" alt="Image 1">
+                        </div>
+                        
+                    </div>
+                    <div class="gallery-item">
+                        <div class="gallery-item-inner">
+                            <img src="images\gallary\2.jpg" alt="Image 2">
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="gallery-item-inner">
+                            <img src="images\gallary\3.jpg" alt="Image 3">
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="gallery-item-inner">
+                            <img src="images\gallary\4.jpg" alt="Image 4">3
+                        </div>
+                    </div>
+                    <div class="gallery-item">            
+                        <div class="gallery-item-inner">
+                            <img src="images\gallary\5.jpg" alt="Image 5">
+                        </div>
+                    </div>
+                    <div class="gallery-item">            
+                        <div class="gallery-item-inner">
+                            <img src="images\gallary\6.jpg" alt="Image 6">
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="gallery-item-inner">
+                            <img src="images\gallary\7.jpg" alt="Image 7">
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="gallery-item-inner">
+                            <img src="images\gallary\8.jpg" alt="Image 8">>
+                        </div>
+                        
+                    </div>
+                    <div class="gallery-item">
+                        <div class="gallery-item-inner">
+                            <img src="images\gallary\9.jpg" alt="Image 9">
+                        </div>
+                    </div>
+            
+                    <div class="gallery-item">
+                        <div class="gallery-item-inner">
+                            <img src="images\gallary\10.png" alt="Image 10">
+                        </div>
+                    </div>
+                </div>
+                <div class="lightbox" id="lightbox">
+                    <div class="lightbox-content">
+                        <img src="" alt="" class="lightbox-image">
+                        <span class="lightbox-prev"></span>
+                        <span class="lightbox-next"></span>
+                        <span class="lightbox-close">&times;</span>
+                    </div>
+                </div>
+            
+                <script>
+                const galleryItems = document.querySelectorAll('.gallery-item');
+                const lightbox = document.getElementById('lightbox');
+                const lightboxImage = document.querySelector('.lightbox-image');
+                const lightboxClose = document.querySelector('.lightbox-close');
+                const lightboxPrev = document.querySelector('.lightbox-prev');
+                const lightboxNext = document.querySelector('.lightbox-next');
+            
+                let currentImageIndex;
+            
+                galleryItems.forEach((item, index) => {
+                    item.addEventListener('click', () => {
+                        currentImageIndex = index;
+                        const imageSource = item.querySelector('img').src;
+                        lightboxImage.src = imageSource;
+                        lightbox.style.display = 'block';
+                    });
+                });
+            
+                lightboxClose.addEventListener('click', () => {
+                    lightbox.style.display = 'none';
+                });
+            
+                lightboxPrev.addEventListener('click', () => {
+                    currentImageIndex = (currentImageIndex === 0) ? galleryItems.length - 1 : currentImageIndex - 1;
+                    const imageSource = galleryItems[currentImageIndex].querySelector('img').src;
+                    lightboxImage.src = imageSource;
+                });
+            
+                lightboxNext.addEventListener('click', () => {
+                    currentImageIndex = (currentImageIndex === galleryItems.length - 1) ? 0 : currentImageIndex + 1;
+                    const imageSource = galleryItems[currentImageIndex].querySelector('img').src;
+                    lightboxImage.src = imageSource;
+                });
+            
+                window.addEventListener('click', (event) => {
+                    if (event.target === lightbox) {
+                        lightbox.style.display = 'none';
+                    }
+                });
+                </script>
+			</div><!-- END COLORLIB-MAIN -->
+		</div><!-- END COLORLIB-PAGE -->
+		
+		<!-- loader -->
+		<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+
+		<script src="js/jquery.min.js"></script>
+		<script src="js/jquery-migrate-3.0.1.min.js"></script>
+		<script src="js/popper.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/jquery.easing.1.3.js"></script>
+		<script src="js/jquery.waypoints.min.js"></script>
+		<script src="js/jquery.stellar.min.js"></script>
+		<script src="js/owl.carousel.min.js"></script>
+		<script src="js/jquery.magnific-popup.min.js"></script>
+		<script src="js/jquery.animateNumber.min.js"></script>
+		<script src="js/scrollax.min.js"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+		<script src="js/google-map.js"></script>
+		<script src="js/main.js"></script>
+		
+	</body>
+	</html>
